@@ -1,0 +1,207 @@
+﻿<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+<select id="num" class="form-select">
+    <!-- 1'den 18'e kadar olan seçenekler -->
+    <option value="13" disabled selected>Harita Görünümü</option>
+    <option value="1">Tüm Dünya Görünümü</option>
+    <option value="5">Ülke Görünümü</option>
+    <option value="13">Şehir Görünümü</option>
+    <option value="18">Sokak Görünümü</option>
+</select>
+<select id="vehicleSelect" class="form-select">
+    <option value="0">Tüm Araçlar</option>
+</select>
+
+<script>
+    $(document).ready(function () {
+        // Araçları al ve select içerisine ekle
+        $.ajax({
+            url: '@Url.Action("GetVehicles", "DeviceVehicles")',
+            type: 'GET',
+            dataType: 'json',
+            success: function (vehicles) {
+                var select = $('#vehicleSelect');
+
+                vehicles.forEach(function (vehicle) {
+                    var option = $('<option>', {
+                        value: vehicle.vehicleId,  // Araç ID'si
+                        text: vehicle.plate // Araç Plakası
+                    });
+                    select.append(option);
+                });
+            },
+            error: function () {
+                console.error("Araç bilgileri alınırken bir hata oluştu.");
+            }
+        });
+
+        
+    });
+</script>
+<div id="map" style="height: 360px;"></div>
+
+<script>
+    let maxLatitude = -Infinity;
+    let minLongitude = Infinity;
+    var num = document.getElementById("num").value;
+    var intNum = parseInt(num, 10);
+    var map = L.map('map');
+    
+    async function setData() {
+        let response;
+        debugger;
+        $('#vehicleSelect').on('change', async function () {  
+            debugger;
+            var selectedVehicleId = $(this).val();  
+            try {
+                
+                if (selectedVehicleId == 0) {
+                    response = await fetch('/TarckingDataAcc/index');
+                } else {
+                    let url = `/TarckingDataAcc/GetById?id=${selectedVehicleId}`;
+                    response = await fetch(url);
+                }
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                let data = await response.json();
+                console.log("Alınan Veriler: ", data);
+            } catch (error) {
+                console.error("Hata oluştu: ", error);
+            }
+
+            console.log("Seçilen Araç ID: " + selectedVehicleId);
+        });
+
+       var vehic = document.getElementById("vehicleSelect").value;
+       var vehicle = parseInt(vehic);
+        if (vehicle == 0) {
+            response = await fetch('/TarckingDataAcc/index');
+        } else {
+            let url = `/TarckingDataAcc/GetById?id=${vehicle}`;
+            response = await fetch(url);
+        }
+        //let response = await fetch('/TarckingDataAcc/index');
+        //if (!response.ok) {
+        //    throw new Error('Network response was not ok');
+        //}
+        let data = await response.json();
+
+        data.forEach(item => {
+            console.log("Alınan Son güncel veri :" + item.serialNumber);
+            debugger;
+            // En büyük Latitude değerini bulma
+            if (item.latitude > maxLatitude) {
+                maxLatitude = item.latitude;
+            }
+
+            // En küçük Longitude değerini bulma
+            if (item.longitude < minLongitude) {
+                minLongitude = item.longitude;
+            }
+            map.setView([maxLatitude, minLongitude], intNum);
+            console.log("Veri:" + item);
+            var latitude = item.latitude || 0; // Varsayılan değer
+            var longitude = item.longitude || 0; // Varsayılan değer
+
+            if (latitude !== 0 && longitude !== 0) {
+                L.marker([latitude, longitude]).addTo(map)
+                    .bindPopup(item.serialNumber) // Dinamik içerik
+                    .openPopup();
+            } else {
+                console.error('Invalid data:', item);
+            }
+        });
+    };
+    async function fetchData() {
+        let response = await fetch('/TarckingDataAcc/index');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        let data = await response.json();
+
+
+        try {
+            debugger;
+            data.forEach(items => {
+                debugger;
+                if (items.latitude > maxLatitude) {
+                    maxLatitude = items.latitude;
+                }
+
+                // En küçük Longitude değerini bulma
+                if (items.longitude < minLongitude) {
+                    minLongitude = items.longitude;
+                }
+            });
+
+            map.setView([maxLatitude, minLongitude], intNum);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);//koordinatlar ve plakalar foreach
+            document.getElementById("num").addEventListener("change", function () {
+                debugger;
+                var selectedValue = this.value;
+                intNum = parseInt(selectedValue, 10);
+                map.setView([maxLatitude, minLongitude], intNum);
+            });
+
+
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    }
+    fetchData();
+    setInterval(function () {
+        setData();
+        //var num = document.getElementById("num").value;
+        //var intNum = parseInt(num, 10);
+        //document.getElementById("num").addEventListener("change", function () {
+        //    var selectedValue = this.value;
+        //    intNum = parseInt(selectedValue, 10);
+        //    map.setView([38.298174, 42.170283], intNum);
+        //});
+        //var map = L.map('map').setView([38.298174, 42.170283], intNum);
+        //L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        //}).addTo(map);//koordinatlar ve plakalar foreach
+        //setInterval(function () {
+
+        //    async function fetchData() {
+        //        debugger;
+        //        let response = await fetch('/TarckingDataAcc/index'); // API endpoint URL
+        //        let data = await response.json();
+        //        data.forEach(item => {
+        //            var marker = L.marker([item.Latitude, item.Longitude]).addTo(map)
+        //                .bindPopup('35AG9467')
+        //                .openPopup();
+        //        });
+        //    }
+        //    fetchData();
+        //    function getRandomCoordinates() {
+
+        //        var lat = 38.29 + (Math.random() - 0.5) * 0.1;
+        //        var lng = 42.17 + (Math.random() - 0.5) * 0.1;
+        //        return [lat, lng];
+        //    }
+        //apiye istek at konumları getir markerleri yeniden konumlandır
+        //var marker = L.marker([38.29, 42.17]).addTo(map)
+        //    .bindPopup('35AG9467')
+        //    .openPopup();
+        //var marker1 = L.marker([38.29, 42.17]).addTo(map)
+        //    .bindPopup('31HOT34')
+        //    .openPopup();
+        //var randomCoords = getRandomCoordinates();
+        //var randomCoord = getRandomCoordinates();
+        //map.setView(randomCoords, 13);
+        //marker.setLatLng(randomCoords);
+        //marker1.setLatLng(randomCoord);
+    }, 10000);
+
+</script>
