@@ -18,7 +18,7 @@ namespace Frontend.Controllers
         }
 
         public async Task<IActionResult> Index()
-        {//newcommit
+        { 
             try
             {
                 string apiUrl = "https://localhost:7299/api/Devices/get-device";
