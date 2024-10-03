@@ -20,9 +20,9 @@ namespace Frontend.Controllers
             try
             {
                 // paketleri de çek tupple yap
-                string apiUrl = "https://localhost:7299/api/PacketContent/get-packetcontent";
+                string apiUrl = "http://localhost:5191/api/PacketContent/get-packetcontent";
                 var response = await _httpClient.GetAsync(apiUrl);
-                string apiUrl2 = "https://localhost:7299/api/Packets/get-packet";
+                string apiUrl2 = "http://localhost:5191/api/Packets/get-packet";
                 var response2 = await _httpClient.GetAsync(apiUrl2);
                 if (response.IsSuccessStatusCode)
                 {
@@ -60,7 +60,7 @@ namespace Frontend.Controllers
             {
                 var jsonData = JsonConvert.SerializeObject(brand);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                await _httpClient.PostAsync("https://localhost:7299/api/PacketContent/create-packetcontent", content);
+                await _httpClient.PostAsync("http://localhost:5191/api/PacketContent/create-packetcontent", content);
 
             }
 
@@ -73,7 +73,7 @@ namespace Frontend.Controllers
             {
                 var jsonData = JsonConvert.SerializeObject(brand);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                await _httpClient.PutAsync("https://localhost:7299/api/PacketContent/update-packetcontent", content);
+                await _httpClient.PutAsync("http://localhost:5191/api/PacketContent/update-packetcontent", content);
 
             }
 
@@ -84,7 +84,7 @@ namespace Frontend.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _httpClient.DeleteAsync("https://localhost:7299/api/PacketContent/delete-packetcontent/" + id);
+                await _httpClient.DeleteAsync("http://localhost:5191/api/PacketContent/delete-packetcontent/" + id);
             }
         }
     }

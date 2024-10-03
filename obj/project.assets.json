@@ -8754,11 +8754,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dogru\\Desktop\\devopsTrackingDataFront\\Frontend\\Frontend.csproj",
+      "projectUniqueName": "C:\\Users\\dogru\\Documents\\GitHub\\TrankingFront\\Frontend\\Frontend.csproj",
       "projectName": "Frontend",
-      "projectPath": "C:\\Users\\dogru\\Desktop\\devopsTrackingDataFront\\Frontend\\Frontend.csproj",
+      "projectPath": "C:\\Users\\dogru\\Documents\\GitHub\\TrankingFront\\Frontend\\Frontend.csproj",
       "packagesPath": "C:\\Users\\dogru\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dogru\\Desktop\\devopsTrackingDataFront\\Frontend\\obj\\",
+      "outputPath": "C:\\Users\\dogru\\Documents\\GitHub\\TrankingFront\\Frontend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\dogru\\AppData\\Roaming\\NuGet\\NuGet.Config",

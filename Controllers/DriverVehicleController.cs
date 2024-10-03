@@ -23,14 +23,14 @@ namespace Frontend.Controllers
             List<DriverVehicle> driverVehicles = new List<DriverVehicle>();
             try
             {
-                string apiUrlDriver = "https://localhost:7299/api/Drivers/get-driver";
+                string apiUrlDriver = "http://localhost:5191/api/Drivers/get-driver";
                 var responseDriver = await _httpClient.GetAsync(apiUrlDriver);
-                string apiUrlVehicle = "https://localhost:7299/api/Vehicles/get-vehicles";
+                string apiUrlVehicle = "http://localhost:5191/api/Vehicles/get-vehicles";
                 var responseVehicle = await _httpClient.GetAsync(apiUrlVehicle);
                 //sürücüleri çek
                 //araçları çek
                 //aracabağlı sürücüleri çek
-                string apiUrl = "https://localhost:7299/api/DriverVehicle/get-drivervehicle";
+                string apiUrl = "http://localhost:5191/api/DriverVehicle/get-drivervehicle";
                 var response = await _httpClient.GetAsync(apiUrl);
                 if (response.IsSuccessStatusCode)
                 {
@@ -90,7 +90,7 @@ namespace Frontend.Controllers
                 brand.IdentificationDate = DateTime.Now;
                 var jsonData = JsonConvert.SerializeObject(brand);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                await _httpClient.PostAsync("https://localhost:7299/api/DriverVehicle/create-drivervehicle", content);
+                await _httpClient.PostAsync("http://localhost:5191/api/DriverVehicle/create-drivervehicle", content);
             }
 
 
@@ -104,7 +104,7 @@ namespace Frontend.Controllers
             {
                 var jsonData = JsonConvert.SerializeObject(brand);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                await _httpClient.PutAsync("https://localhost:7299/api/DriverVehicle/update-drivervehicle", content);
+                await _httpClient.PutAsync("http://localhost:5191/api/DriverVehicle/update-drivervehicle", content);
 
             }
 
@@ -115,7 +115,7 @@ namespace Frontend.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _httpClient.DeleteAsync("https://localhost:7299/api/DriverVehicle/delete-drivervehicle/" + id);
+                await _httpClient.DeleteAsync("http://localhost:5191/api/DriverVehicle/delete-drivervehicle/" + id);
             }
         }
     }

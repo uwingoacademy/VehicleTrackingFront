@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mS9jFlxJXkkA8A4nnR+OyP4hDWvd87IDUAkTU9zqmn3FguH27nW8aoavs9c1te2cSPsrhtnIFeafUuLarsTGgA==",
+  "dgSpecHash": "3W8wp6MpaJwBMzjKl6b/hQHlRsVEqiq/Y9Ef2so6yp4awQ0EttxxXYi4ToOh5DyXGHj/UwKv9qXZog/JgRh02w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dogru\\Desktop\\devopsTrackingDataFront\\Frontend\\Frontend.csproj",
+  "projectFilePath": "C:\\Users\\dogru\\Documents\\GitHub\\TrankingFront\\Frontend\\Frontend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dogru\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\dogru\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

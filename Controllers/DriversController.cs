@@ -20,7 +20,7 @@ namespace Frontend.Controllers
         {
             try
             {
-                string apiUrl = "https://localhost:7299/api/Drivers/get-driver";
+                string apiUrl = "http://localhost:5191/api/Drivers/get-driver";
                 var response = await _httpClient.GetAsync(apiUrl);
                 if (response.IsSuccessStatusCode)
                 {
@@ -53,7 +53,7 @@ namespace Frontend.Controllers
             {
                 var jsonData = JsonConvert.SerializeObject(brand);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                await _httpClient.PostAsync("https://localhost:7299/api/Drivers/create-driver", content);
+                await _httpClient.PostAsync("http://localhost:5191/api/Drivers/create-driver", content);
 
             }
 
@@ -66,7 +66,7 @@ namespace Frontend.Controllers
             {
                 var jsonData = JsonConvert.SerializeObject(brand);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                await _httpClient.PutAsync("https://localhost:7299/api/Drivers/update-driver", content);
+                await _httpClient.PutAsync("http://localhost:5191/api/Drivers/update-driver", content);
 
             }
 
@@ -77,7 +77,7 @@ namespace Frontend.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _httpClient.DeleteAsync("https://localhost:7299/api/Drivers/delete-driver/" + id);
+                await _httpClient.DeleteAsync("http://localhost:5191/api/Drivers/delete-driver/" + id);
             }
         }
     }

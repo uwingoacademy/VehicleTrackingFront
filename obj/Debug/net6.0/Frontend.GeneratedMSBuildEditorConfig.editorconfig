@@ -9,105 +9,109 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Frontend
 build_property.RootNamespace = Frontend
-build_property.ProjectDir = C:\Users\dogru\Desktop\devopsTrackingDataFront\Frontend\
+build_property.ProjectDir = C:\Users\dogru\Documents\GitHub\TrankingFront\Frontend\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\dogru\Desktop\devopsTrackingDataFront\Frontend
+build_property.MSBuildProjectDirectory = C:\Users\dogru\Documents\GitHub\TrankingFront\Frontend
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Brand/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Brand/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnJhbmRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Devices/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Devices/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV2aWNlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/DeviceVehicles/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/DeviceVehicles/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV2aWNlVmVoaWNsZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Drivers/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Drivers/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJpdmVyc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/DriverVehicle/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/DriverVehicle/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJpdmVyVmVoaWNsZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Home/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Home/Privacy.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/MeasurementUnit/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/MeasurementUnit/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVhc3VyZW1lbnRVbml0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Model/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Model/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kZWxcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/PacketContent/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/PacketContent/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFja2V0Q29udGVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Packet/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Packet/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFja2V0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/PeriodicMaintenance/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/PeriodicMaintenance/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyaW9kaWNNYWludGVuYW5jZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Shared/Error.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Shared/_Footer.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Shared/_Footer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb290ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Shared/_Maps.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Shared/_Maps.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NYXBzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Shared/_Sidebar.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Shared/_Sidebar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TaWRlYmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Supplier/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Supplier/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/TarckingDataAcc/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/TarckingDataAcc/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFyY2tpbmdEYXRhQWNjXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/TrackingDataStd/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/TarckingDataAcc/TrackingDataIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFyY2tpbmdEYXRhQWNjXFRyYWNraW5nRGF0YUluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/TrackingDataStd/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhY2tpbmdEYXRhU3RkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Vehicles/Index.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Vehicles/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWNsZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/_ViewImports.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/_ViewStart.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dogru/Desktop/devopsTrackingDataFront/Frontend/Views/Shared/_Layout.cshtml]
+[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-8fgarvx963

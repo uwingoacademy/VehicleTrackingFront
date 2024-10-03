@@ -19,7 +19,7 @@ namespace Frontend.Controllers
         {
             try
             {
-                string apiUrl = "https://localhost:7299/api/Packets/get-packet";
+                string apiUrl = "http://localhost:5191/api/Packets/get-packet";
                 var response = await _httpClient.GetAsync(apiUrl);
                 if (response.IsSuccessStatusCode)
                 {
@@ -52,7 +52,7 @@ namespace Frontend.Controllers
             {
                 var jsonData = JsonConvert.SerializeObject(brand);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                await _httpClient.PostAsync("https://localhost:7299/api/Packets/create-packet", content);
+                await _httpClient.PostAsync("http://localhost:5191/api/Packets/create-packet", content);
 
             }
 
@@ -65,7 +65,7 @@ namespace Frontend.Controllers
             {
                 var jsonData = JsonConvert.SerializeObject(brand);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                await _httpClient.PutAsync("https://localhost:7299/api/Packets/update-packet", content);
+                await _httpClient.PutAsync("http://localhost:5191/api/Packets/update-packet", content);
 
             }
 
@@ -76,7 +76,7 @@ namespace Frontend.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _httpClient.DeleteAsync("https://localhost:7299/api/Packets/delete-driver/" + id);
+                await _httpClient.DeleteAsync("http://localhost:5191/api/Packets/delete-driver/" + id);
             }
         }
     }

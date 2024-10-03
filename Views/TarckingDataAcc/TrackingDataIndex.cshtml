@@ -1,0 +1,214 @@
+﻿@{
+    ViewData["Title"] = "Tedarikçiler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Tuple<List<Vehicles>,List<TrackingDataForStd>>
+@section styles {
+    <link href="~/lib/datatables/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/datatables/buttons.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="row">
+                    <div class="col">
+                        <h4 class="page-title">Paketler</h4>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Araç İzleme</a></li>
+                            <li class="breadcrumb-item active">Paketler</li>
+                        </ol>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        <a href="#" class="btn btn-sm btn-outline-primary" id="Dash_Date">
+                            <span class="day-name" id="Day_Name">Today:</span>&nbsp;
+                            <span class="" id="Select_date">Jan 11</span>
+                            <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-primary">
+                            <i data-feather="download" class="align-self-center icon-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    @*araçlar ve datetimepectire burada olacak *@
+                    <h4 class="card-title">Araçlar</h4>
+                    <p class="text-muted mb-0">
+                       İzlenebilir araçlarınız burada görünür
+                    </p>
+                </div>
+                <div class="card-body">
+                    <div style="display:flex;">
+                        <div style="width:15%;">
+                            <select name="vehicleSelected" class="form-select" id="vehicleSelected">
+                                @foreach (var items in Model.Item1)
+                                {
+                                    <option value="@items.VehicleId">@items.Plate</option>
+                                }
+                            </select>
+                        </div>
+                        <div style="width:25%;">
+                            <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+                            <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+                            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+                            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+                            <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                <i class="fa fa-calendar"></i>&nbsp;
+                                <span></span> <i class="fa fa-caret-down"></i>
+                            </div>
+                            <script type="text/javascript">
+                                $(document).ready(function () {
+
+                                    var start = moment().subtract(29, 'days');
+                                    var end = moment();
+
+                                    function cb(start, end) {
+                                        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                                    }
+
+                                    $('#reportrange').daterangepicker({
+                                        startDate: start,
+                                        endDate: end,
+                                        ranges: {
+                                            'Bugün': [moment(), moment()],
+                                            'Dün': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                                            'Bu Hafta': [moment().subtract(6, 'days'), moment()],
+                                            'Son 30 Gün': [moment().subtract(29, 'days'), moment()],
+                                            'Bu Ay': [moment().startOf('month'), moment().endOf('month')],
+                                            'Geçen Ay': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                                        }
+                                    }, cb);
+
+                                    cb(start, end);
+                                    $('#showDataBtn').on('click', function () {
+                                        var vehicleId = $('#vehicleSelected').val();
+                                        var dateRange = $('#reportrange').data('daterangepicker');
+                                        var firstDate = dateRange.startDate.format('YYYY-MM-DD');
+                                        var lastDate = dateRange.endDate.format('YYYY-MM-DD');
+                                        debugger;
+                                        $.ajax({
+                                            
+                                            type: 'POST',
+                                            url: '@Url.Action("FiltreIndex", "TarckingDataAcc")', // Controller adını güncelle
+                                            data: {
+                                                id: vehicleId,
+                                                firstDate: firstDate,
+                                                lastDate: lastDate
+                                            },
+                                            success: function (response) {
+                                                // Gelen veriyi tabloda göstermek için tbody kısmını boşalt
+                                                var tableBody = $('table tbody');
+                                                tableBody.empty();
+                                                if (response.trackingdata.length === 0) {
+                                                    tableBody.append('<tr><td colspan="18">Veri bulunamadı</td></tr>');
+                                                }
+                                                // trackingdata içerisindeki her bir veri için tabloya yeni satır ekle
+                                                response.trackingdata.forEach(function (item) {
+                                                    console.log(item);
+                                                    var row = '<tr>' +
+                                                        '<td>' + item.serialNumber + '</td>' +
+                                                        '<td>' + item.timestamp + '</td>' +
+                                                        '<td>' + item.latitude + '</td>' +
+                                                        '<td>' + item.longitude + '</td>' +
+                                                        '<td>' + item.speed + '</td>' +
+                                                        '<td>' + item.altitude + '</td>' +
+                                                        '<td>' + item.odometer + '</td>' +
+                                                        '<td>' + (item.ısOpenIgnition ? 'Kontak Açık' : 'Kontak Kapalı') + '</td>' +
+                                                        '<td>' + item.fuelLevel + '</td>' +
+                                                        '<td>' + item.ns + '</td>' +
+                                                        '<td>' + item.ew + '</td>' +
+                                                        '<td>' + item.satellites + '</td>' +
+                                                        '<td>' + item.cog + '</td>' +
+                                                        '<td>' + item.diN1 + '</td>' +
+                                                        '<td>' + item.diN2 + '</td>' +
+                                                        '<td>' + item.dout + '</td>' +
+                                                        '<td>' + item.totalSpentFuel + '</td>' +
+                                                        '<td>' + item.gsM_RSSI + '</td>' +
+                                                        '</tr>';
+
+                                                    // Satırı tabloya ekle
+                                                    tableBody.append(row);
+                                                });
+                                            },
+                                            error: function (error) {
+                                                console.error("Hata oluştu:", error);
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                        </div>
+                        <div style="width:15%;">
+                            <button type="button" id="showDataBtn" class="btn btn-soft-primary btn-md">Göster</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="" class="" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Cihaz Seri Numarası</th>
+                                <th>Veri Kayıt Tarihi</th>
+                                <th>Enlem</th>
+                                <th>Boylam</th>
+                                <th>Hız</th>
+                                <th>Rakım</th>
+                                <th>Kilometre Sayacı</th>
+                                 <th>Kontak Durumu</th>
+                                <th>Yakıt Seviyesi</th>
+                                <th>
+                                    North South
+                                </th>
+                                <th>Doğu Batı</th>
+                                <th>Uydular</th>
+                                <th>COG</th>
+                                <th>Giriş Pini 1</th>
+                                <th>Giriş Pini 2</th>
+                                <th>Çıkış Pini 1</th>
+                                <th>Toplam Harcanan Yakıt</th>
+                                <th>Sinyal Gücü</th>
+                            </tr>
+                        </thead>
+                       
+                            @if (Model.Item1 is not null)
+                            {
+                            <tbody>
+                               
+                            
+                        </tbody>
+                            }
+                    
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables/dataTables.bootstrap5.min.js"></script>
+    <script src="~/lib/datatables/dataTables.buttons.min.js"></script>
+    <script src="~/lib/datatables/buttons.bootstrap5.min.js"></script>
+    <script src="~/lib/datatables/jszip.min.js"></script>
+    <script src="~/lib/datatables/pdfmake.min.js"></script>
+    <script src="~/lib/datatables/vfs_fonts.js"></script>
+    <script src="~/lib/datatables/buttons.html5.min.js"></script>
+    <script src="~/lib/datatables/buttons.print.min.js"></script>
+    <script src="~/lib/datatables/buttons.colVis.min.js"></script>
+    <script src="~/lib/datatables/dataTables.responsive.min.js"></script>
+    <script src="~/lib/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="~/js/pages/jquery.datatable.init.js"></script>
+}
+

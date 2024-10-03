@@ -26,7 +26,7 @@ namespace Frontend.Controllers
                 List<Vehicles> vehicles = new List<Vehicles>();
                 List<DeviceVehicles> deviceVehicles = new List<DeviceVehicles>();
                 //vehicle
-                string apiUrl = "https://localhost:7299/api/Vehicles/get-vehicles";
+                string apiUrl = "http://localhost:5191/api/Vehicles/get-vehicles";
                 var response = await _httpClient.GetAsync(apiUrl);
                 if (response.IsSuccessStatusCode)
                 {
@@ -37,7 +37,7 @@ namespace Frontend.Controllers
                     });
                 }
                 //Device
-                string apiUrlDevice = "https://localhost:7299/api/Devices/get-device";
+                string apiUrlDevice = "http://localhost:5191/api/Devices/get-device";
                 var responseDevice = await _httpClient.GetAsync(apiUrlDevice);
                 if (response.IsSuccessStatusCode)
                 {
@@ -47,7 +47,7 @@ namespace Frontend.Controllers
                         PropertyNameCaseInsensitive = true
                     });
                 }
-                string apiUrlDeviceVehicle = "https://localhost:7299/api/DeviceVehicles/get-devicevehicle";
+                string apiUrlDeviceVehicle = "http://localhost:5191/api/DeviceVehicles/get-devicevehicle";
                 var responseDeviceVehicle = await _httpClient.GetAsync(apiUrlDeviceVehicle);
                 if (response.IsSuccessStatusCode)
                 {
@@ -80,7 +80,7 @@ namespace Frontend.Controllers
                 brand.InstallDate = DateTime.Now;
                 var jsonData = JsonConvert.SerializeObject(brand);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                await _httpClient.PostAsync("https://localhost:7299/api/DeviceVehicles/create-devicevehicle", content);
+                await _httpClient.PostAsync("http://localhost:5191/api/DeviceVehicles/create-devicevehicle", content);
 
             }
         }
@@ -93,7 +93,7 @@ namespace Frontend.Controllers
             {
                 var jsonData = JsonConvert.SerializeObject(brand);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                await _httpClient.PutAsync("https://localhost:7299/api/DeviceVehicles/update-devicevehicle", content);
+                await _httpClient.PutAsync("http://localhost:5191/api/DeviceVehicles/update-devicevehicle", content);
             }
         }
         [HttpPost]
@@ -101,7 +101,7 @@ namespace Frontend.Controllers
         { //delete durumunda bu idye sahip veride bulunan cihazın bağlı durumunu false çek update yap ardından bu id veriyi sil
             if (ModelState.IsValid)
             {
-                await _httpClient.DeleteAsync("https://localhost:7299/api/DeviceVehicles/delete-devicevehicle/" + id);
+                await _httpClient.DeleteAsync("http://localhost:5191/api/DeviceVehicles/delete-devicevehicle/" + id);
             }
         }
 

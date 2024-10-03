@@ -5,9 +5,9 @@ namespace Frontend.Models
 {
     public class TrackingDataForStd
     {
-        public int TrackingDataId { get; set; }
+        public int? TrackingDataId { get; set; }
         [MaxLength(8)]
-        public char SerialNumber { get; set; }
+        public string SerialNumber { get; set; }
         public DateTime Timestamp { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
