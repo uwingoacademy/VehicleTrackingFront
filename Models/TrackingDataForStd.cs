@@ -8,23 +8,23 @@ namespace Frontend.Models
         public int? TrackingDataId { get; set; }
         [MaxLength(8)]
         public string SerialNumber { get; set; }
-        public DateTime Timestamp { get; set; }
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
-        public decimal Speed { get; set; }
-        public decimal Altitude { get; set; }
-        public decimal Odometer { get; set; }
-        public bool IsOpenIgnition { get; set; }
-        public decimal FuelLevel { get; set; }
-        public char NS { get; set; }
-        public char EW { get; set; }
+        public DateTime dateTime { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
+        public float Speed { get; set; }
+        public float Altitude { get; set; }
+        public float OdoMeter { get; set; }
+        public bool Workingstatus { get; set; }
+        public float FuelLevel { get; set; }
+        public string NorthSouth { get; set; }
+        public string EastWest { get; set; }
         public int Satellites { get; set; }
-        public decimal COG { get; set; }
-        public bool DIN1 { get; set; }
-        public bool DIN2 { get; set; }
-        public bool DOUT { get; set; }
-        public decimal TotalSpentFuel { get; set; }
+        public float COG { get; set; }
+        public bool Input1Status { get; set; }
+        public bool Input2Status { get; set; }
+        public bool OutPutStatus { get; set; }
+        public float TotalSpentFuel { get; set; }
         [Column(TypeName = "tinyint")]
-        public byte GSM_RSSI { get; set; }
+        public int Numberofsatellites { get; set; }
     }
 }

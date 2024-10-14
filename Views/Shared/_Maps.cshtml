@@ -12,7 +12,7 @@
     <option value="13">Şehir Görünümü</option>
     <option value="18">Sokak Görünümü</option>
 </select>
-<div id="map" style="height: 360px;"></div>
+<div id="map" style="height: 360px; position: relative; z-index: 1;"></div>
 <script>
     debugger;
     let maxLatitude = -Infinity;
@@ -24,8 +24,29 @@
     async function setData(){
         let response = await fetch('/TarckingDataAcc/index'); // API endpoint URL
         data = await response.json();
+        var num = document.getElementById("num").value;
+        var intNum = parseInt(num, 10);
+        document.getElementById("num").addEventListener("change", function () {
+            var selectedValue = this.value;
+            intNum = parseInt(selectedValue, 10);
+            map.setView([maxLatitude, minLongitude], intNum);
+        });
+        data.forEach(item => {
+            debugger;
+            if (item.trackingDataForStd.latitude > maxLatitude) {
+                maxLatitude = item.trackingDataForStd.latitude;
+            }
+            if (item.trackingDataForStd.longitude < minLongitude) {
+                minLongitude = item.trackingDataForStd.longitude;
+            }
+        });
+        map.setView([maxLatitude, minLongitude], intNum);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);//koordinatlar ve plakalar foreach
+        fetchData();
     }
-   
+    setData();
     setInterval(function () {
         debugger;
         setData();
@@ -37,19 +58,15 @@
             map.setView([maxLatitude, minLongitude], intNum);
         });
         data.forEach(item => {
-                    console.log("Alınan Son güncel veri :" + item.trackingDataForStd.serialNumber);
-                    debugger;
-                    // En büyük Latitude değerini bulma
-                    if (item.trackingDataForStd.latitude > maxLatitude) {
-                        maxLatitude = item.trackingDataForStd.latitude;
-                    }
-
-                    // En küçük Longitude değerini bulma
-                    if (item.trackingDataForStd.longitude < minLongitude) {
-                        minLongitude = item.trackingDataForStd.longitude;
-                    }
-        }
-               map.setView([maxLatitude, minLongitude], intNum);
+            debugger;
+            if (item.trackingDataForStd.latitude > maxLatitude) {
+                maxLatitude = item.trackingDataForStd.latitude;
+            }
+            if (item.trackingDataForStd.longitude < minLongitude) {
+                minLongitude = item.trackingDataForStd.longitude;
+            }
+        });
+        map.setView([maxLatitude, minLongitude], intNum);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);//koordinatlar ve plakalar foreach

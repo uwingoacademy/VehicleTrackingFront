@@ -693,6 +693,14 @@
       "PackagePath": "staticwebassets\\images\\users\\user-9.jpg"
     },
     {
+      "Id": "C:\\Users\\dogru\\Documents\\GitHub\\TrankingFront\\Frontend\\wwwroot\\images\\uwingo.ico",
+      "PackagePath": "staticwebassets\\images\\uwingo.ico"
+    },
+    {
+      "Id": "C:\\Users\\dogru\\Documents\\GitHub\\TrankingFront\\Frontend\\wwwroot\\images\\uwingoLogo.jpg",
+      "PackagePath": "staticwebassets\\images\\uwingoLogo.jpg"
+    },
+    {
       "Id": "C:\\Users\\dogru\\Documents\\GitHub\\TrankingFront\\Frontend\\wwwroot\\images\\widgets\\1.jpg",
       "PackagePath": "staticwebassets\\images\\widgets\\1.jpg"
     },
