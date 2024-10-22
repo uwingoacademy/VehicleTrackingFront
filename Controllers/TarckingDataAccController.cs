@@ -13,8 +13,8 @@ namespace Frontend.Controllers
     {
         private readonly HttpClient _httpClient;
         private static List<DeviceVehicles>? last;
-      //  List<DeviceVehicles> last = new List<DeviceVehicles>();
-      List<DeviceVehicleWithDetails> deviceVehicleWithDetails = new List<DeviceVehicleWithDetails>();
+        //  List<DeviceVehicles> last = new List<DeviceVehicles>();
+        private static List<DeviceVehicleWithDetails> deviceVehicleWithDetails = new List<DeviceVehicleWithDetails>();
         public TarckingDataAccController(HttpClient httpClient)
         {
             _httpClient = httpClient;
@@ -76,7 +76,7 @@ namespace Frontend.Controllers
             deviceVehicleWithDetails = await GetActiveDevice();
             foreach (var item in deviceVehicleWithDetails) {
                 //Aktif araçları Vehicle getir
-                string apiUrlVehicle = $"http://localhost:5191/api/Vehicles/getby-vehicle/{item.DeviceVehicle.VehicleId}";
+                string apiUrlVehicle = $"http://78.111.111.81:5191/api/Vehicles/getby-vehicle/{item.DeviceVehicle.VehicleId}";
                     var responseVehicle = await _httpClient.GetAsync(apiUrlVehicle);
                     if (responseVehicle.IsSuccessStatusCode)
                     {
@@ -89,7 +89,7 @@ namespace Frontend.Controllers
                             vehicleActive.Add(modelVehicle);
                     }
                     //Aktif Deviceleri getir
-                    string apiUrlDevice = $"http://localhost:5191/api/Devices/getby-device/{item.DeviceVehicle.DeviceId}";
+                    string apiUrlDevice = $"http://78.111.111.81:5191/api/Devices/getby-device/{item.DeviceVehicle.DeviceId}";
                     var responseDevice = await _httpClient.GetAsync(apiUrlDevice);
                     var jsonResponseDevice = await responseDevice.Content.ReadAsStringAsync();
                     var model = System.Text.Json.JsonSerializer.Deserialize<Devices>(jsonResponseDevice, new JsonSerializerOptions
@@ -112,11 +112,11 @@ namespace Frontend.Controllers
             string us = lastDate.ToString("yyyy-MM-ddTHH:mm:ss", new CultureInfo("en-US"));
             string usFrist = firstDate.ToString("yyyy-MM-ddTHH:mm:ss", new CultureInfo("en-US"));
 
-            foreach (var item in last)
+            foreach (var item in deviceVehicleWithDetails)
             {
-                if (item.VehicleId == id)
+                if (item.DeviceVehicle.VehicleId == id)
                 {
-                    string apiUrlDevice = $"http://78.111.111.81:5191/api/Devices/getby-device/{item.DeviceId}";
+                    string apiUrlDevice = $"http://78.111.111.81:5191/api/Devices/getby-device/{item.DeviceVehicle.DeviceId}";
                     var responseDevice = await _httpClient.GetAsync(apiUrlDevice);
                     var jsonResponseDevice = await responseDevice.Content.ReadAsStringAsync();
                     var model = System.Text.Json.JsonSerializer.Deserialize<Devices>(jsonResponseDevice, new JsonSerializerOptions
@@ -160,7 +160,7 @@ namespace Frontend.Controllers
             public List<T> Data { get; set; }
         }
         public async Task<List<TrackingDataForStd>> GetLastData(List<string> series) {
-            var apiUrlLast = "http://localhost:5007/WeatherForecast/getby-srnlastlist";
+            var apiUrlLast = "http://78.111.111.81:5007/WeatherForecast/getby-srnlastlist";
             var responseLast = await _httpClient.PostAsJsonAsync(apiUrlLast, series);
             var jsonResponseLast = await responseLast.Content.ReadAsStringAsync();
             var models = System.Text.Json.JsonSerializer.Deserialize<List<TrackingDataForStd>>(jsonResponseLast, new JsonSerializerOptions
@@ -172,7 +172,7 @@ namespace Frontend.Controllers
         public async Task<List<DeviceVehicleWithDetails>> GetActiveDevice() {
             List<DeviceVehicles> last = new List<DeviceVehicles>();
             List<DeviceVehicleWithDetails> deviceVehiclesActive = new List<DeviceVehicleWithDetails>();
-            string apiUrl = "http://localhost:5191/api/DeviceVehicles/get-activedevice";
+            string apiUrl = "http://78.111.111.81:5191/api/DeviceVehicles/get-activedevice";
             var response = await _httpClient.GetAsync(apiUrl);
             if (response != null)
             {

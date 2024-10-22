@@ -21,9 +21,9 @@ namespace Frontend.Controllers
         { 
             try
             {
-                string apiUrl = "http://localhost:5191/api/Devices/get-device";
+                string apiUrl = "http://78.111.111.81:5191/api/Devices/get-device";
                 var response = await _httpClient.GetAsync(apiUrl);
-                string apiUrlPacket = "http://localhost:5191/api/Packets/get-packet";
+                string apiUrlPacket = "http://78.111.111.81:5191/api/Packets/get-packet";
                 var responsePacket = await _httpClient.GetAsync(apiUrlPacket);
                 if (response.IsSuccessStatusCode)
                 {
@@ -61,7 +61,7 @@ namespace Frontend.Controllers
             {
                 var jsonData = JsonConvert.SerializeObject(brand);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                await _httpClient.PostAsync("http://localhost:5191/api/Devices/create-device", content);
+                await _httpClient.PostAsync("http://78.111.111.81:5191/api/Devices/create-device", content);
 
             }
 
@@ -74,7 +74,7 @@ namespace Frontend.Controllers
             {
                 var jsonData = JsonConvert.SerializeObject(brand);
                 var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                await _httpClient.PutAsync("http://localhost:5191/api/Devices/update-device", content);
+                await _httpClient.PutAsync("http://78.111.111.81:5191/api/Devices/update-device", content);
 
             }
 
@@ -85,7 +85,7 @@ namespace Frontend.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _httpClient.DeleteAsync("http://localhost:5191/api/Devices/delete-device/" + id);
+                await _httpClient.DeleteAsync("http://78.111.111.81:5191/api/Devices/delete-device/" + id);
             }
         }
     }

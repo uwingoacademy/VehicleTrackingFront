@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4A+ZC7AeUeRX3gXWcQLIagX7vBPZn3hnnEqOCdkxEYE=",
+  "Hash": "aq7mxydRJOw7ITagZQ3KcrbRW5WRIqmvx+gYHRICKIo=",
   "Source": "Frontend",
   "BasePath": "_content/Frontend",
   "Mode": "Default",
@@ -2973,6 +2973,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\users\\user-9.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\dogru\\Documents\\GitHub\\TrankingFront\\Frontend\\wwwroot\\images\\uwingo.ico",
+      "SourceId": "Frontend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dogru\\Documents\\GitHub\\TrankingFront\\Frontend\\wwwroot\\",
+      "BasePath": "_content/Frontend",
+      "RelativePath": "images/uwingo.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\uwingo.ico"
+    },
+    {
+      "Identity": "C:\\Users\\dogru\\Documents\\GitHub\\TrankingFront\\Frontend\\wwwroot\\images\\uwingoLogo.jpg",
+      "SourceId": "Frontend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dogru\\Documents\\GitHub\\TrankingFront\\Frontend\\wwwroot\\",
+      "BasePath": "_content/Frontend",
+      "RelativePath": "images/uwingoLogo.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\uwingoLogo.jpg"
     },
     {
       "Identity": "C:\\Users\\dogru\\Documents\\GitHub\\TrankingFront\\Frontend\\wwwroot\\images\\widgets\\1.jpg",
