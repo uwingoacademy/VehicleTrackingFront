@@ -16,10 +16,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\dogru\Documents\GitHub\TrankingFront\Frontend
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Brand/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnJhbmRcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Devices/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV2aWNlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -42,14 +38,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/MeasurementUnit/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVhc3VyZW1lbnRVbml0XEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Model/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9kZWxcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/PacketContent/Index.cshtml]
@@ -82,10 +70,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/Supplier/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcGxpZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dogru/Documents/GitHub/TrankingFront/Frontend/Views/TarckingDataAcc/Index.cshtml]

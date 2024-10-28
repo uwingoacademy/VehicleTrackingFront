@@ -4,11 +4,11 @@
 }
 
 @model List<Packets>
-@section styles {
+@*@section styles {
     <link href="~/lib/datatables/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
     <link href="~/lib/datatables/buttons.bootstrap5.min.css" rel="stylesheet" type="text/css" />
     <link href="~/lib/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-}
+}*@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
@@ -21,16 +21,6 @@
                             <li class="breadcrumb-item active">Paketler</li>
                         </ol>
                     </div>
-                    <div class="col-auto align-self-center">
-                        <a href="#" class="btn btn-sm btn-outline-primary" id="Dash_Date">
-                            <span class="day-name" id="Day_Name">Today:</span>&nbsp;
-                            <span class="" id="Select_date">Jan 11</span>
-                            <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
-                        </a>
-                        <a href="#" class="btn btn-sm btn-outline-primary">
-                            <i data-feather="download" class="align-self-center icon-xs"></i>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -39,7 +29,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Markalar</h4>
+                    <h4 class="card-title">Paketler</h4>
                     <p class="text-muted mb-0">
                         Envanterinizde bulunan ürünlerinize ait paketler
                     </p>
@@ -146,7 +136,7 @@
     </div>
 </div>
 @section scripts {
-    <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+   @* <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
     <script src="~/lib/datatables/dataTables.bootstrap5.min.js"></script>
     <script src="~/lib/datatables/dataTables.buttons.min.js"></script>
     <script src="~/lib/datatables/buttons.bootstrap5.min.js"></script>
@@ -162,7 +152,7 @@
     <script src="~/js/alert/create.js"></script>
     <script src="~/js/alert/delete.js"></script>
     <script src="~/js/alert/update.js"></script>
-
+*@
     <script>
         $('#sa-update').click(function () {
             var Packet = {

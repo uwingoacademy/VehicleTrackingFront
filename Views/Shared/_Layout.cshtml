@@ -22,6 +22,11 @@
     <link href="~/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
     <link href="~/css/app.min.css" rel="stylesheet" type="text/css" />
     <link href="~/lib/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="~/lib/datatables/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/datatables/buttons.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="">
@@ -35,22 +40,6 @@
             <!-- Navbar -->
             <nav class="navbar-custom">
                 <ul class="list-unstyled topbar-nav float-end mb-0">
-                    <li class="dropdown hide-phone">
-                        <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-bs-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="false" aria-expanded="false">
-                            <i data-feather="search" class="topbar-icon"></i>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-end dropdown-lg p-0">
-                            <!-- Top Search Bar -->
-                            <div class="app-search-topbar">
-                                <form action="#" method="get">
-                                    <input type="search" name="search" class="from-control top-search mb-0" placeholder="Type text...">
-                                    <button type="submit"><i class="ti-search"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    </li>
                     <li class="dropdown">
                         <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-bs-toggle="dropdown" href="#" role="button"
                            aria-haspopup="false" aria-expanded="false">
@@ -96,11 +85,34 @@
     <script src="~/js/moment.js"></script>
     <script src="~/lib/daterangepicker/daterangepicker.js"></script>
 
+
+
+
     @RenderSection("scripts", false)
     <!-- App js -->
     <script src="~/js/app.js"></script>
     <script src="~/lib/sweet-alert2/sweetalert2.min.js"></script>
     <script src="~/js/pages/jquery.sweet-alert.init.js"></script>
-  
+
+
+
+
+
+    <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables/dataTables.bootstrap5.min.js"></script>
+    <script src="~/lib/datatables/dataTables.buttons.min.js"></script>
+    <script src="~/lib/datatables/buttons.bootstrap5.min.js"></script>
+    <script src="~/lib/datatables/jszip.min.js"></script>
+    <script src="~/lib/datatables/pdfmake.min.js"></script>
+    <script src="~/lib/datatables/vfs_fonts.js"></script>
+    <script src="~/lib/datatables/buttons.html5.min.js"></script>
+    <script src="~/lib/datatables/buttons.print.min.js"></script>
+    <script src="~/lib/datatables/buttons.colVis.min.js"></script>
+    <script src="~/lib/datatables/dataTables.responsive.min.js"></script>
+    <script src="~/lib/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="~/js/pages/jquery.datatable.init.js"></script>
+    <script src="~/js/alert/create.js"></script>
+    <script src="~/js/alert/delete.js"></script>
+    <script src="~/js/alert/update.js"></script>
 </body>
 </html>

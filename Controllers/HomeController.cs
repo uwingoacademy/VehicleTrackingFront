@@ -1,4 +1,5 @@
 ﻿using Frontend.Helper;
+using Frontend.HttpRequests;
 using Frontend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -8,28 +9,16 @@ namespace Frontend.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly HttpClient _httpClient;
+        GenericRequests<Cound> genericRequests = new GenericRequests<Cound>();
 
-        public HomeController(ILogger<HomeController> logger, HttpClient httpClient)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _httpClient = httpClient;
-
         }
         public async Task<IActionResult> Index()
         {
-            Cound cound = new Cound();
-            string apiUrl = "http://78.111.111.81:5191/api/Cound/get-cound";
-            var response = await _httpClient.GetAsync(apiUrl);
-            if (response.IsSuccessStatusCode)
-            {
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-                cound = System.Text.Json.JsonSerializer.Deserialize<Cound>(jsonResponse, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
-            }
-            return View(cound);
+            var responseApi =   await genericRequests.GetHttpRequest(":5191/api/Cound/get-cound");
+            return View(responseApi);
         }
     }
 }

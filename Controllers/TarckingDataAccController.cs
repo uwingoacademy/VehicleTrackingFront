@@ -6,6 +6,8 @@ using System.Text;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
+using Frontend.HttpRequests;
+using System.Reflection;
 
 namespace Frontend.Controllers
 {
@@ -13,6 +15,7 @@ namespace Frontend.Controllers
     {
         private readonly HttpClient _httpClient;
         private static List<DeviceVehicles>? last;
+
         //  List<DeviceVehicles> last = new List<DeviceVehicles>();
         private static List<DeviceVehicleWithDetails> deviceVehicleWithDetails = new List<DeviceVehicleWithDetails>();
         public TarckingDataAccController(HttpClient httpClient)
@@ -25,41 +28,23 @@ namespace Frontend.Controllers
             try
             {
                 List<TrackingDataViewModel> trackingDataViewModels = new List<TrackingDataViewModel>();
-                List<TrackingDataForStd> datas = new List<TrackingDataForStd>();
-                deviceVehicleWithDetails =   await  GetActiveDevice();
-                List<Devices> devices = new List<Devices>();
-                List<string> series = new List<string>();
-                foreach (var item2 in deviceVehicleWithDetails)
+                deviceVehicleWithDetails = await GetActiveDevice();
+                var deviceVehicleDict = deviceVehicleWithDetails.ToDictionary(d => d.Device.SerialNumber, d => d.Vehicle);
+                var series = deviceVehicleDict.Keys.ToList();
+                var datas = await GetLastData(series);
+                foreach (var item in datas)
                 {
-                    series.Add(item2.Device.SerialNumber);  
-                }
-                datas = await GetLastData(series);
-                //foreach (var item2 in last)
-                //{
-                //    string apiUrlDevice = $"http://78.111.111.81:5191/api/Devices/getby-device/{item2.DeviceId}";
-                //    var responseDevice = await _httpClient.GetAsync(apiUrlDevice);
-                //    var jsonResponseDevice = await responseDevice.Content.ReadAsStringAsync();
-                //    var model = System.Text.Json.JsonSerializer.Deserialize<Devices>(jsonResponseDevice, new JsonSerializerOptions
-                //    {
-                //        PropertyNameCaseInsensitive = true
-                //    });
-                //    devices.Add(model);
-                //}
-                foreach (var item4 in datas)
-                {
-                    foreach (var item5 in deviceVehicleWithDetails) {
-                        if (item5.Device.SerialNumber == item4.SerialNumber)
+                    if (item != null && deviceVehicleDict.TryGetValue(item.SerialNumber, out var vehicle) && vehicle != null)
+                    {
+                        TrackingDataViewModel trackingDataViewModel = new TrackingDataViewModel
                         {
-                            TrackingDataViewModel trackingDataViewModel = new TrackingDataViewModel();
-                            trackingDataViewModel.trackingDataForStd = item4;
-                            trackingDataViewModel.vehicles = item5.Vehicle;
-                            trackingDataViewModels.Add(trackingDataViewModel);
-                        }
+                            trackingDataForStd = item,
+                            vehicles = vehicle
+                        };
+                        trackingDataViewModels.Add(trackingDataViewModel);
                     }
                 }
-               
                 return Ok(trackingDataViewModels);
-
             }
             catch (Exception ex)
             {
@@ -75,30 +60,14 @@ namespace Frontend.Controllers
             List<TrackingDataForStd> trackingdata = new List<TrackingDataForStd>();
             deviceVehicleWithDetails = await GetActiveDevice();
             foreach (var item in deviceVehicleWithDetails) {
-                //Aktif araçları Vehicle getir
-                string apiUrlVehicle = $"http://78.111.111.81:5191/api/Vehicles/getby-vehicle/{item.DeviceVehicle.VehicleId}";
-                    var responseVehicle = await _httpClient.GetAsync(apiUrlVehicle);
-                    if (responseVehicle.IsSuccessStatusCode)
-                    {
-                        var jsonResponseVehicle = await responseVehicle.Content.ReadAsStringAsync();
-                         var modelVehicle = System.Text.Json.JsonSerializer.Deserialize<Vehicles>(jsonResponseVehicle, new JsonSerializerOptions
-                        {
-                            PropertyNameCaseInsensitive = true
-                        });
-                        if (modelVehicle is not null)
-                            vehicleActive.Add(modelVehicle);
-                    }
-                    //Aktif Deviceleri getir
-                    string apiUrlDevice = $"http://78.111.111.81:5191/api/Devices/getby-device/{item.DeviceVehicle.DeviceId}";
-                    var responseDevice = await _httpClient.GetAsync(apiUrlDevice);
-                    var jsonResponseDevice = await responseDevice.Content.ReadAsStringAsync();
-                    var model = System.Text.Json.JsonSerializer.Deserialize<Devices>(jsonResponseDevice, new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    });
-                    if(model is not null)
-                    devices.Add(model);
-                //model.SerialNumber seri no firstDate last Date göre verileri getir ekrana bas
+                GenericRequests<Vehicles> genericRequestsVehicles = new GenericRequests<Vehicles>();
+               var vehicles=  await  genericRequestsVehicles.GetHttpRequest($":5191/api/Vehicles/getby-vehicle/{item.DeviceVehicle.VehicleId}");
+                if (vehicles is not null)
+                    vehicleActive.Add(vehicles);
+                GenericRequests<Devices> genericRequestsDevices = new GenericRequests<Devices>();
+               var device = await genericRequestsDevices.GetHttpRequest($":5191/api/Devices/getby-device/{item.DeviceVehicle.DeviceId}");
+                if (device is not null)
+                    devices.Add(device);
             }
             return View("TrackingDataIndex",Tuple.Create(vehicleActive, trackingdata));
         }
@@ -116,14 +85,8 @@ namespace Frontend.Controllers
             {
                 if (item.DeviceVehicle.VehicleId == id)
                 {
-                    string apiUrlDevice = $"http://78.111.111.81:5191/api/Devices/getby-device/{item.DeviceVehicle.DeviceId}";
-                    var responseDevice = await _httpClient.GetAsync(apiUrlDevice);
-                    var jsonResponseDevice = await responseDevice.Content.ReadAsStringAsync();
-                    var model = System.Text.Json.JsonSerializer.Deserialize<Devices>(jsonResponseDevice, new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    });
-
+                    GenericRequests<Devices> genericRequestsDevices = new GenericRequests<Devices>();
+                 var model =  await genericRequestsDevices.GetHttpRequest($":5191/api/Devices/getby-device/{item.DeviceVehicle.DeviceId}");
                     string apiUrlDeviceMongo = $"http://78.111.111.81:5007/WeatherForecast/getby-filtre?serialNumber={model.SerialNumber}&firstDate={usFrist}&lastDate={us}&pageNumber={pageNumber}&pageSize={pageSize}";
                     var responseDeviceMongo = await _httpClient.GetAsync(apiUrlDeviceMongo);
                     var jsonResponseDeviceMongo = await responseDeviceMongo.Content.ReadAsStringAsync();
@@ -132,8 +95,6 @@ namespace Frontend.Controllers
                     {
                         PropertyNameCaseInsensitive = true
                     });
-
-                    // trackingDataResponse objesinde hem sayfa bilgileri hem de veri var
                     trackingdatas = trackingDataResponse.Data;
                     int totalRecords = trackingDataResponse.TotalRecords;
                     int pageNumbers = trackingDataResponse.PageNumber;
@@ -145,11 +106,7 @@ namespace Frontend.Controllers
                     ViewBag.TotalPages = totalPages;
                 }
             }
-           
-
             var modelData = new Tuple<List<Vehicles>, List<TrackingDataForStd>>(vehicleActive, trackingdatas);
-
-            // PartialView'i döndür
             return PartialView("Index", trackingdatas);
         }
         public class ApiResponse<T>
@@ -170,18 +127,8 @@ namespace Frontend.Controllers
             return models.ToList();
         }
         public async Task<List<DeviceVehicleWithDetails>> GetActiveDevice() {
-            List<DeviceVehicles> last = new List<DeviceVehicles>();
-            List<DeviceVehicleWithDetails> deviceVehiclesActive = new List<DeviceVehicleWithDetails>();
-            string apiUrl = "http://78.111.111.81:5191/api/DeviceVehicles/get-activedevice";
-            var response = await _httpClient.GetAsync(apiUrl);
-            if (response != null)
-            {
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-                deviceVehiclesActive = System.Text.Json.JsonSerializer.Deserialize<List<DeviceVehicleWithDetails>>(jsonResponse, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
-            }
+         GenericRequests<DeviceVehicleWithDetails> genericRequestsDeviceVehicleWithDetails = new GenericRequests<DeviceVehicleWithDetails>();
+          var deviceVehiclesActive = await  genericRequestsDeviceVehicleWithDetails.GetListHttpRequest(":5191/api/DeviceVehicles/get-activedevice");
             return deviceVehiclesActive.ToList();
         }
     }

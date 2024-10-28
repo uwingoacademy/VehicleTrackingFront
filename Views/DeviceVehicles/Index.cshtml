@@ -4,11 +4,11 @@
 }
 
 @model Tuple<List<DeviceVehicles>,List<Devices>,List<Vehicles>,List<Devices>,List<Vehicles>>
-@section styles {
+@*@section styles {
     <link href="~/lib/datatables/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
     <link href="~/lib/datatables/buttons.bootstrap5.min.css" rel="stylesheet" type="text/css" />
     <link href="~/lib/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-}
+}*@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
@@ -20,16 +20,6 @@
                             <li class="breadcrumb-item"><a href="javascript:void(0);">Araca Bağlı Cihaz Yönetimi</a></li>
                             <li class="breadcrumb-item active">Araca Bağlı Cihazlar</li>
                         </ol>
-                    </div>
-                    <div class="col-auto align-self-center">
-                        <a href="#" class="btn btn-sm btn-outline-primary" id="Dash_Date">
-                            <span class="day-name" id="Day_Name">Today:</span>&nbsp;
-                            <span class="" id="Select_date">Jan 11</span>
-                            <i data-feather="calendar" class="align-self-center icon-xs ms-1"></i>
-                        </a>
-                        <a href="#" class="btn btn-sm btn-outline-primary">
-                            <i data-feather="download" class="align-self-center icon-xs"></i>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -93,20 +83,26 @@
                                         </td>
                                     }
                                     <td>
-                                        <div style="display: inline-block;">
+                                        @if (item.RemoveDate == null)
+                                        {
+                                            <div style="display: inline-block;">
 
                                             <button type="submit" class="btn btn-link text-reset fs-16 px-1" data-bs-toggle="modal" data-bs-target="#updateDriver" data-id="@item.ConnectionId" data-device="@item.DeviceId" data-vehicle="@item.VehicleId" data-ins="@item.InstallDate" data-remove="@item.RemoveDate">
                                                 <i class="mdi mdi-alert-octagram"></i>
                                             </button>
                                         </div>
+                                        }
                                     </td>
                                     <td>
-                                        <div style="display: inline-block;">
-                                            <input type="hidden" id="ConnectionId" name="ConnectionId" value="@item.ConnectionId" />
+                                         @if (item.RemoveDate == null)
+                                        {
+                                            <div style="display: inline-block;">
+                                                <input type="hidden" id="ConnectionId" name="ConnectionId" value="@item.ConnectionId" />
                                             <button type="button" class="btn btn-link text-reset fs-16" onclick="Dele(@item.ConnectionId)">
                                                 <i class="mdi mdi-delete-sweep"></i>
                                             </button>
                                         </div>
+                                        }
                                     </td>
 
                                 </tr>
@@ -211,7 +207,7 @@
     </div>
 </div>
 @section scripts {
-    <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+   @* <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
     <script src="~/lib/datatables/dataTables.bootstrap5.min.js"></script>
     <script src="~/lib/datatables/dataTables.buttons.min.js"></script>
     <script src="~/lib/datatables/buttons.bootstrap5.min.js"></script>
@@ -226,7 +222,7 @@
     <script src="~/js/pages/jquery.datatable.init.js"></script>
     <script src="~/js/alert/create.js"></script>
     <script src="~/js/alert/delete.js"></script>
-    <script src="~/js/alert/update.js"></script>
+    <script src="~/js/alert/update.js"></script>*@
 
     <script>
         $('#sa-update').click(function () {

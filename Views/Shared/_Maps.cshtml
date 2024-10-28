@@ -14,6 +14,62 @@
 </select>
 <div id="map" style="height: 360px; position: relative; z-index: 1;"></div>
 <script>
+    let maxLatitude, minLongitude;
+    var map = L.map('map').setView([0, 0], 1);
+    let data = null;
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var markers = L.layerGroup().addTo(map);
+
+    async function setData() {
+        try {
+            let response = await fetch('/TarckingDataAcc/index'); 
+            data = await response.json();
+            maxLatitude = -Infinity;
+            minLongitude = Infinity;
+
+            var num = document.getElementById("num").value;
+            var intNum = parseInt(num, 10);
+            data.forEach(item => {
+                if (item.trackingDataForStd) {
+                    if (item.trackingDataForStd.latitude > maxLatitude) {
+                        maxLatitude = item.trackingDataForStd.latitude;
+                    }
+                    if (item.trackingDataForStd.longitude < minLongitude) {
+                        minLongitude = item.trackingDataForStd.longitude;
+                    }
+                }
+            });
+            map.setView([maxLatitude, minLongitude], intNum);
+            markers.clearLayers();
+            fetchData();
+        } catch (error) {
+            console.error("Data fetch error:", error);
+        }
+    }
+
+    document.getElementById("num").addEventListener("change", function () {
+        var selectedValue = this.value;
+        var intNum = parseInt(selectedValue, 10);
+        map.setView([maxLatitude, minLongitude], intNum);
+    });
+
+    async function fetchData() {
+        data.forEach(item => {
+            if (item.trackingDataForStd) {
+                var marker = L.marker([item.trackingDataForStd.latitude, item.trackingDataForStd.longitude])
+                    .bindPopup(item.vehicles.plate);
+                markers.addLayer(marker);
+            }
+        });
+    }
+    setData();
+    setInterval(setData, 30000);
+</script>
+
+@*<script>
     debugger;
     let maxLatitude = -Infinity;
     let minLongitude = Infinity;
@@ -33,11 +89,13 @@
         });
         data.forEach(item => {
             debugger;
+            if (item.trackingDataForStd) {
             if (item.trackingDataForStd.latitude > maxLatitude) {
                 maxLatitude = item.trackingDataForStd.latitude;
             }
             if (item.trackingDataForStd.longitude < minLongitude) {
                 minLongitude = item.trackingDataForStd.longitude;
+            }
             }
         });
         map.setView([maxLatitude, minLongitude], intNum);
@@ -59,11 +117,13 @@
         });
         data.forEach(item => {
             debugger;
+            if (item.trackingDataForStd) {
             if (item.trackingDataForStd.latitude > maxLatitude) {
                 maxLatitude = item.trackingDataForStd.latitude;
             }
             if (item.trackingDataForStd.longitude < minLongitude) {
                 minLongitude = item.trackingDataForStd.longitude;
+            }
             }
         });
         map.setView([maxLatitude, minLongitude], intNum);
@@ -75,9 +135,11 @@
         async function fetchData() {
             debugger;
             data.forEach(item => {
+            if (item.trackingDataForStd) {
                 var marker = L.marker([item.trackingDataForStd.latitude, item.trackingDataForStd.longitude]).addTo(map)
                     .bindPopup(item.vehicles.plate)
                     .openPopup();
+            }
             });
         }
 
@@ -147,4 +209,4 @@
         //} catch (error) {
         //    console.error('Fetch error:', error);
         //}
-</script>
+</script>*@
