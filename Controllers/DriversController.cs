@@ -82,8 +82,8 @@ namespace Frontend.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _httpClient.DeleteAsync("http://localhost:5191/api/Drivers/delete-driver/" + id);
-             // await genericRequestsDrivers.DeleteRequestGeneric(":5191/api/Drivers/delete-driver/" , id);
+              //   await _httpClient.DeleteAsync("http://localhost:5191/api/Drivers/delete-driver/" + id);
+             await genericRequestsDrivers.DeleteRequestGeneric(":5191/api/Drivers/delete-driver/" , id);
             }
         }
     }

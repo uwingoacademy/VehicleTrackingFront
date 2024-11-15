@@ -7,7 +7,7 @@
 
         public static HttpClient InitializeClientBaseAddress(this IServiceCollection services, IConfiguration configuration)
         {
-            var result = "http://78.111.111.81";
+            var result = "http://localhost";
             Client = new HttpClient();
 
             Client.BaseAddress = new Uri(result.ToString());

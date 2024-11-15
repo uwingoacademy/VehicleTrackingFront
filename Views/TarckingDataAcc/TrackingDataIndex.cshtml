@@ -8,7 +8,8 @@
     <link href="~/lib/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 }
 @model Tuple<List<Vehicles>,List<TrackingDataForStd>>
-
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer localizer
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
@@ -93,7 +94,7 @@
                             </div>
                         </div>
                         <div style="width:15%;">
-                            <button type="button" id="showDataBtn" class="btn btn-soft-primary btn-md">Göster</button>
+                            <button type="button" id="showDataBtn" class="btn btn-soft-primary btn-md">@localizer["Show"]</button>
                         </div>*@
                         <div style="" class="col-auto align-self-center">
                             <a href="#" class="btn btn-sm btn-outline-primary" id="Dash_Date">
@@ -103,7 +104,7 @@
                             </a>
                         </div>
                         <div style="">
-                            <button type="button" id="showDataBtn" class="btn btn-soft-primary btn-md">Göster</button>
+                            <button type="button" id="showDataBtn" class="btn btn-soft-primary btn-md">@localizer["Show"]</button>
                         </div>
                     </div>
                 </div>

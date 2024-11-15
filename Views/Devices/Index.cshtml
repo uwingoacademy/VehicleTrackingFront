@@ -4,6 +4,8 @@
 }
 
 @model Tuple<List<Devices>,List<Packets>>
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer localizer
 @*@section styles {
     <link href="~/lib/datatables/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
     <link href="~/lib/datatables/buttons.bootstrap5.min.css" rel="stylesheet" type="text/css" />
@@ -15,10 +17,10 @@
             <div class="page-title-box">
                 <div class="row">
                     <div class="col">
-                        <h4 class="page-title">Cihazlar</h4>
+                        <h4 class="page-title">@localizer["Devices"]</h4>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Cihazlar Yönetimi</a></li>
-                            <li class="breadcrumb-item active">Cihazlar</li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">@localizer["DeviceManagement"]</a></li>
+                            <li class="breadcrumb-item active">@localizer["Devices"]</li>
                         </ol>
                     </div>
                 </div>
@@ -29,26 +31,26 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Cihazlar</h4>
+                    <h4 class="card-title">@localizer["Devices"]</h4>
                     <p class="text-muted mb-0">
-                        Envanterinizde bulunan ürünlerinize ait Cihazlar
+                      @localizer["InventoryDevices"]
                     </p>
                 </div>
                 <div class="card-body">
                     <div class="button-items">
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#addDriver" class="btn btn-secondary">Cihaz Ekle</button>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#addDriver" class="btn btn-secondary"> @localizer["AddDevice"]</button>
                     </div>
                 </div>
                 <div class="card-body">
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
-                                <th>Cihaz Seri Numara</th>
-                                <th>Cihaz Model</th>
-                                <th>Cihaz Paket Tipi</th>
-                                <th>Bağlı Araç</th>
-                                <th>Güncelle</th>
-                                <th>Sil</th>
+                                <th>@localizer["DeviceSerialNumber"]</th>
+                                <th>@localizer["DeviceModel"]</th>
+                                <th>@localizer["DevicePacketType"]</th>
+                                <th>@localizer["ConnectedVehicle"]</th>
+                                <th>@localizer["Update"]</th>
+                                <th>@localizer["Delete"]</th>
                             </tr>
                         </thead>
 
@@ -62,10 +64,10 @@
                                     <td>@item.PacketType</td>
                                     @if (item.IsConnectedVehicles)
                                     {
-                                        <td>Bağlı</td>
+                                        <td>@localizer["Connected"]</td>
                                     }else
                                     {
-                                        <td>Bağlı Değil</td>
+                                        <td>@localizer["NotConnected"]</td>
                                     }
                                     <td>
                                         <div style="display: inline-block;">
@@ -97,13 +99,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title m-0" id="updateSupplierLabel">Cihazı Güncelle</h6>
+                <h6 class="modal-title m-0" id="updateSupplierLabel">@localizer["UpdateDevice"]</h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <input type="hidden" name="updateDeviceId" id="updateDeviceId" />
                 <div class="form-group">
-                    <label for="item-name">Paket Tipi</label>
+                    <label for="item-name">@localizer["PacketType"]</label>
                     <select name="PacketType" class="form-select" id="PacketType">
                         @foreach (var item in Model.Item2)
                         {
@@ -112,23 +114,23 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="item-name">Seri Numara</label>
+                    <label for="item-name">@localizer["SerialNumber"]</label>
                     <input type="text" class="form-control" id="SerialNumber" name="SerialNumber" required>
                 </div>
                 <div class="form-group">
-                    <label for="item-name">Model</label>
+                    <label for="item-name">@localizer["Model"]</label>
                     <input type="text" class="form-control" id="Model" name="Model" required>
                 </div>
                 <div class="form-group">
-                    <label for="item-name">Bağlı Araç</label>
+                    <label for="item-name">@localizer["ConnectedVehicle"]</label>
                     <select name="IsConnectedVehicles" data-selected=IsConnectedVehicles class="form-select" id="IsConnectedVehicles">
-                        <option value="True">Bağlı</option>
-                        <option value="False">Bağlı değil</option>
+                        <option value="True">@localizer["Connected"]</option>
+                        <option value="False">@localizer["NotConnected"]</option>
                     </select>
                   </div>
                 <div class="modal-footer">
-                    <button type="button" id="sa-update" class="btn btn-soft-primary btn-sm">Değişiklikleri Kaydet</button>
-                    <button type="button" class="btn btn-soft-secondary btn-sm" data-bs-dismiss="modal">Kapat</button>
+                    <button type="button" id="sa-update" class="btn btn-soft-primary btn-sm">@localizer["SaveChanges"]</button>
+                    <button type="button" class="btn btn-soft-secondary btn-sm" data-bs-dismiss="modal">@localizer["Close"]</button>
                 </div>
 
             </div>
@@ -139,20 +141,20 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title m-0" id="addSupplierLabel">Cihaz Ekle</h6>
+                <h6 class="modal-title m-0" id="addSupplierLabel">@localizer["AddDevice"]</h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="item-name">Seri Numara</label>
+                    <label for="item-name">@localizer["SerialNumber"]</label>
                     <input type="text" class="form-control" id="CreateDeviceSeri" name="CreateDeviceSeri" required>
                 </div>
                 <div class="form-group">
-                    <label for="item-name">Model</label>
+                    <label for="item-name">@localizer["Model"]</label>
                     <input type="text" class="form-control" id="CreateDeviceModel" name="CreateDeviceModel" required>
                 </div>
                 <div class="form-group">
-                    <label for="item-name">Paket Tipi</label>
+                    <label for="item-name">@localizer["PacketType"]</label>
                     <select name="CreateDevicePacket" class="form-select" id="CreateDevicePacket" required>
                         @foreach (var item in Model.Item2)
                         {
@@ -161,15 +163,15 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="item-name">Bağlı Araç</label>
+                    <label for="item-name">@localizer["ConnectedVehicle"]</label>
                     <select name="CreateDeviceConnect" class="form-select" id="CreateDeviceConnect">
-                        <option value="true">Bağlı</option>      
-                        <option value="false">Bağlı Değil</option>
+                        <option value="true">@localizer["Connected"]</option>      
+                        <option value="false">@localizer["NotConnected"]</option>
                     </select>
                </div>
                 <div class="modal-footer">
-                    <button type="button" id="sa-create" class="btn btn-soft-primary btn-sm">Kaydet</button>
-                    <button type="button" class="btn btn-soft-secondary btn-sm" data-bs-dismiss="modal">Kapat</button>
+                    <button type="button" id="sa-create" class="btn btn-soft-primary btn-sm">@localizer["Save"]</button>
+                    <button type="button" class="btn btn-soft-secondary btn-sm" data-bs-dismiss="modal">@localizer["Close"]</button>
                 </div>
 
             </div>
@@ -259,4 +261,3 @@
 
 
 }
-

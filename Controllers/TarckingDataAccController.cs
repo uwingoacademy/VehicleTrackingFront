@@ -87,7 +87,7 @@ namespace Frontend.Controllers
                 {
                     GenericRequests<Devices> genericRequestsDevices = new GenericRequests<Devices>();
                  var model =  await genericRequestsDevices.GetHttpRequest($":5191/api/Devices/getby-device/{item.DeviceVehicle.DeviceId}");
-                    string apiUrlDeviceMongo = $"http://78.111.111.81:5007/WeatherForecast/getby-filtre?serialNumber={model.SerialNumber}&firstDate={usFrist}&lastDate={us}&pageNumber={pageNumber}&pageSize={pageSize}";
+                    string apiUrlDeviceMongo = $"http://localhost:5007/WeatherForecast/getby-filtre?serialNumber={model.SerialNumber}&firstDate={usFrist}&lastDate={us}&pageNumber={pageNumber}&pageSize={pageSize}";
                     var responseDeviceMongo = await _httpClient.GetAsync(apiUrlDeviceMongo);
                     var jsonResponseDeviceMongo = await responseDeviceMongo.Content.ReadAsStringAsync();
 
@@ -117,7 +117,7 @@ namespace Frontend.Controllers
             public List<T> Data { get; set; }
         }
         public async Task<List<TrackingDataForStd>> GetLastData(List<string> series) {
-            var apiUrlLast = "http://78.111.111.81:5007/WeatherForecast/getby-srnlastlist";
+            var apiUrlLast = "http://localhost:5007/WeatherForecast/getby-srnlastlist";
             var responseLast = await _httpClient.PostAsJsonAsync(apiUrlLast, series);
             var jsonResponseLast = await responseLast.Content.ReadAsStringAsync();
             var models = System.Text.Json.JsonSerializer.Deserialize<List<TrackingDataForStd>>(jsonResponseLast, new JsonSerializerOptions
